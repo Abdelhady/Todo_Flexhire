@@ -32,8 +32,14 @@ android {
         jvmTarget = "1.8"
     }
 
+    compileOptions { // https://stackoverflow.com/a/49525685/905801
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
+def retrofit_version = '2.8.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -51,6 +57,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
 
     // https://kotlinlang.org/docs/reference/kapt.html
     kapt("com.google.auto.service:auto-service:1.0-rc4")

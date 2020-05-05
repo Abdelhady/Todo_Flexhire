@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.todo_flexhire.backend.model.User
+import com.example.todo_flexhire.services.AuthService
 
 class SignupViewModel : ViewModel() {
 
@@ -76,6 +78,8 @@ class SignupViewModel : ViewModel() {
     fun registerUser(view: View) {
         loading.value = true
         // TODO call the back-end here .. somehow :) .. retrofit
+        val user = User(name.value!!, email.value!!, password.value!!, passwordConfirm.value!!)
+        AuthService.signup(user)
     }
 
 }
