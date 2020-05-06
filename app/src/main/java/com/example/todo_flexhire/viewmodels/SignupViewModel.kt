@@ -48,6 +48,7 @@ class SignupViewModel : ViewModel() {
     }
 
     val loading = MutableLiveData(false)
+    val isRegistered = MutableLiveData(false)
 
     val canRegister = MediatorLiveData<Boolean>().apply {
         addSource(nameError) {
@@ -79,7 +80,11 @@ class SignupViewModel : ViewModel() {
         loading.value = true
         // TODO call the back-end here .. somehow :) .. retrofit
         val user = User(name.value!!, email.value!!, password.value!!, passwordConfirm.value!!)
-        AuthService.signup(user)
+        AuthService.signup(user, {
+            isRegistered.value = true
+        }, {
+            loading.value = false
+        })
     }
 
 }

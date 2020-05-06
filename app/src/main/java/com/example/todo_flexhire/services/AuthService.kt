@@ -13,7 +13,7 @@ import timber.log.Timber
 
 object AuthService {
 
-    fun signup(user: User) {
+    fun signup(user: User, successCallback: ()->Unit, failureCallback: (error: String?)->Unit) {
         Timber.d("result: before request, local authToken is: %s", prefs.authToken)
 
         val todoService = WebServiceBuilder.getTodoService()
@@ -29,12 +29,14 @@ object AuthService {
                     Timber.d("result: message: %s", signupResult.message)
                     Timber.d("result: Token: %s", signupResult.auth_token)
                     prefs.authToken = signupResult.auth_token
+                    successCallback()
                 } else {
                     Timber.d(
                         "result: not successful, with code: %s, message: %s",
                         response.getApiError()?.code,
                         response.getApiError()?.message
                     )
+                    failureCallback(response.getApiError()?.message)
                 }
             }
 
@@ -44,6 +46,7 @@ object AuthService {
                     t.getApiError()?.code,
                     t.getApiError()?.message
                 )
+                failureCallback(t.getApiError()?.message)
             }
         })
     }
