@@ -1,6 +1,6 @@
 package com.example.todo_flexhire.backend.model
 
-data class Todos(
+data class TodoModel(
     val id: Int,
     val title: String,
     val createdBy: String,

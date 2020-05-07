@@ -3,7 +3,7 @@ package com.example.todo_flexhire.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_flexhire.backend.model.Todos
+import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.databinding.SingleTodoBinding
 
 /**
@@ -13,7 +13,7 @@ class TodosAdapter() :
     RecyclerView.Adapter<TodosAdapter.ViewHolder>() {
 
     // TODO try to use the live data directly here!
-    var items: List<Todos> = emptyList()
+    var items: MutableList<TodoModel> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -34,7 +34,7 @@ class TodosAdapter() :
     }
 
     inner class ViewHolder(val binding: SingleTodoBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Todos) {
+        fun bind(item: TodoModel) {
             binding.todoModel = item
             binding.executePendingBindings()
         }
