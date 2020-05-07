@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo_flexhire.databinding.ActivityMainBinding
 import com.example.todo_flexhire.viewmodels.SignupViewModel
+import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openTodosActivity() {
+        Timber.d("Auth Token: %s", prefs.authToken)
         val intent = Intent(this, TodosListActivity::class.java)
         startActivity(intent)
         finish()
