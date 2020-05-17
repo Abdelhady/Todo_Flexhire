@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.databinding.SingleTodoBinding
+import timber.log.Timber
 
 /**
  * https://www.untitledkingdom.com/blog/refactoring-recyclerview-adapter-to-data-binding-5631f239095f-0
+ * also: https://androidwave.com/android-data-binding-recyclerview/
  */
 class TodosAdapter() :
     RecyclerView.Adapter<TodosAdapter.ViewHolder>() {
@@ -21,7 +23,11 @@ class TodosAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = SingleTodoBinding.inflate(inflater)
+        val binding = SingleTodoBinding.inflate(
+            inflater,
+            parent,
+            false
+        ) // To fill the full width: https://stackoverflow.com/a/30692398/905801
         return ViewHolder(binding)
     }
 
@@ -37,6 +43,9 @@ class TodosAdapter() :
         fun bind(item: TodoModel) {
             binding.todoModel = item
             binding.executePendingBindings()
+            itemView.setOnClickListener {
+                Timber.d("clicking on ${item.title}")
+            }
         }
     }
 
