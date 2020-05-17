@@ -22,15 +22,20 @@ class TodoRepo {
                 call: Call<List<TodoModel>>,
                 response: Response<List<TodoModel>>
             ) {
+                if (!response.isSuccessful) {
+                    Timber.d("result: result is not successful with error code ${response.getApiError()?.code}")
+                    return
+                }
                 data.value = response.body()
                 Timber.d("result: result title is: %s", data.value?.get(0)?.title)
             }
 
             override fun onFailure(call: Call<List<TodoModel>>, t: Throwable) {
+                val apiError = t.getApiError()
                 Timber.d(
                     "result: response error, code: %s, message: %s",
-                    t.getApiError()?.code,
-                    t.getApiError()?.message
+                    apiError?.code,
+                    apiError?.message
                 )
             }
 
@@ -52,7 +57,12 @@ class TodoRepo {
             }
 
             override fun onFailure(call: Call<TodoModel>, t: Throwable) {
-                TODO("Not yet implemented")
+                val apiError = t.getApiError()
+                Timber.d(
+                    "result: response error, code: %s, message: %s",
+                    apiError?.code,
+                    apiError?.message
+                )
             }
 
         })
