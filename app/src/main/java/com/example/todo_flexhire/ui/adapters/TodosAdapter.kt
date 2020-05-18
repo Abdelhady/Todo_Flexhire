@@ -1,8 +1,10 @@
 package com.example.todo_flexhire.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_flexhire.TodoItemActivity
 import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.databinding.SingleTodoBinding
 import timber.log.Timber
@@ -45,6 +47,9 @@ class TodosAdapter() :
             binding.executePendingBindings()
             itemView.setOnClickListener {
                 Timber.d("clicking on ${item.title}")
+                val intent = Intent(itemView.context, TodoItemActivity::class.java)
+                intent.putExtra("id", item.id)
+                itemView.context.startActivity(intent)
             }
         }
     }
