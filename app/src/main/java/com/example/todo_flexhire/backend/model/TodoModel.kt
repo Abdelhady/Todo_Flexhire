@@ -5,5 +5,6 @@ data class TodoModel(
     val title: String,
     val createdBy: String,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
+    val items: List<TodoItemModel>
 )

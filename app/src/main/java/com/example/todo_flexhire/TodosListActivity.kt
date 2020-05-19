@@ -47,7 +47,7 @@ class TodosListActivity : AppCompatActivity() {
         viewModel.newlyAddedTodo.observe(this, Observer {
             Timber.d("result: in activity, saved title is: %s", it.title)
             adapter.items.add(it)
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemInserted(adapter.items.indexOf(it))
         })
     }
 
