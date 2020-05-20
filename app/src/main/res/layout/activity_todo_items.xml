@@ -8,33 +8,107 @@
             type="com.example.todo_flexhire.viewmodels.TodoItemsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TodoItemsActivity">
 
-        <TextView
-            android:id="@+id/todoTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/todoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@{viewModel.todoModel.title}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/itemsRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/itemsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/todoTitle"
+                app:layout_constraintStart_toStartOf="@+id/todoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/todoTitle" />
+            <!-- `0dp` for: https://stackoverflow.com/a/49584773/905801 -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="@{viewModel.todoModel.title}"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/itemsRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="bottom|end"
+            android:background="@android:color/white"
+            android:elevation="30dp"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:visibility="invisible"
+            app:layout_behavior="com.google.android.material.transformation.FabTransformationSheetBehavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/itemsRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/todoTitle"
-            app:layout_constraintStart_toStartOf="@+id/todoTitle"
-            app:layout_constraintTop_toBottomOf="@+id/todoTitle" />
-        <!-- `0dp` for: https://stackoverflow.com/a/49584773/905801 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/titleTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Item Name">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.newName}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@={viewModel.doneChecked}"
+                android:text="Done" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/createButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="@{viewModel.canCreate}"
+                    android:onClick="@{viewModel.createItem}"
+                    android:text="Create" />
+            </LinearLayout>
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right|end"
+            android:layout_margin="8dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

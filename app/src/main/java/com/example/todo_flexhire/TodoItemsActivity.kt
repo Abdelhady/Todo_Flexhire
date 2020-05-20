@@ -25,6 +25,15 @@ class TodoItemsActivity : AppCompatActivity() {
         val id: Int = intent.extras?.get("id") as Int
         viewModel.fetchTodo(id)
         initItemsList()
+        initFab()
+    }
+
+    private fun initFab() {
+        fab.setOnClickListener {
+            fab.isExpanded = true
+            // TODO focus on the textfield, with openin keyboard
+        }
+        cancelButton.setOnClickListener { fab.isExpanded = false }
     }
 
     private fun initItemsList() {
@@ -32,6 +41,8 @@ class TodoItemsActivity : AppCompatActivity() {
         itemsRecyclerView.adapter = adapter
         viewModel.todoModel.observe(this, Observer {
             adapter.items = it?.items?.toMutableList()!!
+            fab.isExpanded = false
+            // TODO hide keyboard here
         })
     }
 
