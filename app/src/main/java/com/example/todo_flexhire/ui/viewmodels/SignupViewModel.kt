@@ -78,12 +78,12 @@ class SignupViewModel : ViewModel() {
 
     fun registerUser(view: View) {
         loading.value = true
-        // TODO call the back-end here .. somehow :) .. retrofit
         val user = User(name.value!!, email.value!!, password.value!!, passwordConfirm.value!!)
         AuthService.signup(user, {
             isRegistered.value = true
         }, {
             loading.value = false
+            // TODO show the returned error message
         })
     }
 

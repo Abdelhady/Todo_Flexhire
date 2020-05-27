@@ -1,10 +1,7 @@
 package com.example.todo_flexhire.services
 
 import com.example.todo_flexhire.backend.WebServiceBuilder
-import com.example.todo_flexhire.backend.model.SignupResult
-import com.example.todo_flexhire.backend.model.TodoModel
-import com.example.todo_flexhire.backend.model.User
-import com.example.todo_flexhire.backend.model.getApiError
+import com.example.todo_flexhire.backend.model.*
 import com.example.todo_flexhire.prefs
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,13 +15,35 @@ object AuthService {
 
     fun signup(user: User, successCallback: () -> Unit, failureCallback: (error: String?) -> Unit) {
         Timber.d("result: before request, local authToken is: %s", prefs.authToken)
+        val authCallback = getAuthCallback(failureCallback, successCallback)
+        todoService.createUser(user).enqueue(authCallback)
+    }
 
-        val call = todoService.createUser(user)
-        call.enqueue(object : Callback<SignupResult> {
-            override fun onResponse(
-                call: Call<SignupResult>,
-                response: Response<SignupResult>
-            ) {
+    fun signin(
+        loginData: LoginData,
+        successCallback: () -> Unit,
+        failureCallback: (error: String?) -> Unit
+    ) {
+        val authCallback = getAuthCallback(failureCallback, successCallback)
+        todoService.loginUser(loginData).enqueue(authCallback)
+    }
+
+    private fun getAuthCallback(
+        failureCallback: (error: String?) -> Unit,
+        successCallback: () -> Unit
+    ): Callback<TokenResult> {
+        return object : Callback<TokenResult> {
+            override fun onFailure(call: Call<TokenResult>, t: Throwable) {
+                val apiError = t.getApiError()
+                Timber.d(
+                    "result: response error, code: %s, message: %s",
+                    apiError?.code,
+                    apiError?.message
+                )
+                failureCallback(apiError?.message)
+            }
+
+            override fun onResponse(call: Call<TokenResult>, response: Response<TokenResult>) {
                 if (response.isSuccessful) {
                     val signupResult = response.body()!!
                     Timber.d("result: message: %s", signupResult.message)
@@ -42,20 +61,7 @@ object AuthService {
                 }
             }
 
-            override fun onFailure(call: Call<SignupResult>, t: Throwable) {
-                val apiError = t.getApiError()
-                Timber.d(
-                    "result: response error, code: %s, message: %s",
-                    apiError?.code,
-                    apiError?.message
-                )
-                failureCallback(apiError?.message)
-            }
-        })
-    }
-
-    fun signin() {
-
+        }
     }
 
     fun ifTokenExpired(callback: () -> Unit) {

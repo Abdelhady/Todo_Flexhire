@@ -7,7 +7,10 @@ import retrofit2.http.*
 public interface FlexhireTodoService {
 
     @POST("signup")
-    fun createUser(@Body user: User): Call<SignupResult>
+    fun createUser(@Body user: User): Call<TokenResult>
+
+    @POST("auth/login")
+    fun loginUser(@Body loginData: LoginData): Call<TokenResult>
 
     @GET("todos")
     fun getTodos(): Call<List<TodoModel>>
