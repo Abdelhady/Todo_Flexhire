@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_flexhire.backend.model.TodoItemModel
 import com.example.todo_flexhire.databinding.TodoItemBinding
-import com.example.todo_flexhire.viewmodels.SingleItemViewModel
+import com.example.todo_flexhire.ui.viewmodels.SingleItemViewModel
 import kotlinx.android.synthetic.main.todo_item.view.*
 
 class ItemsAdapter() : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {

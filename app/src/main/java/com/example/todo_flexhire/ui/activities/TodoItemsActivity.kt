@@ -1,4 +1,4 @@
-package com.example.todo_flexhire
+package com.example.todo_flexhire.ui.activities
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,9 +7,10 @@ import androidx.core.app.NavUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todo_flexhire.R
 import com.example.todo_flexhire.databinding.ActivityTodoItemsBinding
 import com.example.todo_flexhire.ui.adapters.ItemsAdapter
-import com.example.todo_flexhire.viewmodels.TodoItemsViewModel
+import com.example.todo_flexhire.ui.viewmodels.TodoItemsViewModel
 import kotlinx.android.synthetic.main.activity_todo_items.*
 
 class TodoItemsActivity : AppCompatActivity() {
@@ -21,7 +22,9 @@ class TodoItemsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityTodoItemsBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_todo_items)
+            DataBindingUtil.setContentView(this,
+                R.layout.activity_todo_items
+            )
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         val id: Int = intent.extras?.get("id") as Int

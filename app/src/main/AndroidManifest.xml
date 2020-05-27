@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".TodoItemsActivity"
-            android:parentActivityName=".TodosListActivity"></activity>
-        <activity android:name=".TodosListActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".ui.activities.TodoItemsActivity"
+            android:parentActivityName=".ui.activities.TodosListActivity"></activity>
+        <activity android:name=".ui.activities.TodosListActivity" />
+        <activity android:name=".ui.activities.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
