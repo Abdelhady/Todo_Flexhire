@@ -68,6 +68,10 @@ class TodoRepo {
     }
 
     fun getTodo(id: Int): MutableLiveData<TodoModel> {
+        return getTodo(id) {}
+    }
+
+    fun getTodo(id: Int, successCallback: (TodoModel) -> Unit): MutableLiveData<TodoModel> {
         val data = MutableLiveData<TodoModel>()
         todoService.getTodo(id).enqueue(object : Callback<TodoModel> {
             override fun onFailure(call: Call<TodoModel>, t: Throwable) {
@@ -80,6 +84,7 @@ class TodoRepo {
                     return
                 }
                 data.value = response.body()
+                successCallback(data.value!!)
             }
 
         })
@@ -117,6 +122,42 @@ class TodoRepo {
                     return
                 }
                 response.body()?.let { successCallback(it) }
+            }
+
+        })
+    }
+
+    fun updateTitle(todoId: Int, model: TodoModelForPost, successCallback: () -> Unit) {
+        todoService.updateTodo(todoId, model).enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // TODO handle failure
+                Timber.e(t)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (!response.isSuccessful) {
+                    // TODO handle failure
+                    return
+                }
+                successCallback()
+            }
+
+        })
+    }
+
+    fun deleteTodo(id: Int, successCallback: () -> Unit) {
+        todoService.deleteTodo(id).enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // TODO handle failure
+                Timber.e(t)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (!response.isSuccessful) {
+                    // TODO handle failure
+                    return
+                }
+                successCallback()
             }
 
         })

@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.todo_flexhire.viewmodels.TodoItemsViewModel" />
@@ -18,26 +20,115 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/todoTitle"
+            <LinearLayout
+                android:id="@+id/titleContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="@{viewModel.todoModel.title}"
-                android:textSize="18sp"
+                android:orientation="vertical"
+                android:padding="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/itemsRecyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/todoTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.todoModel.title}"
+                        android:textSize="18sp"
+                        android:visibility="@{viewModel.editMode? View.GONE : View.VISIBLE}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/editButton"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/editButton"
+                        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_toRightOf="@id/todoTitle"
+                        android:onClick="@{viewModel.startEditMode}"
+                        android:visibility="@{viewModel.editMode? View.GONE : View.VISIBLE}"
+                        app:icon="@drawable/ic_edit"
+                        app:iconSize="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/deleteButton"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/deleteButton"
+                        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:onClick="@{viewModel.deleteTodo}"
+                        android:visibility="@{viewModel.editMode? View.GONE : View.VISIBLE}"
+                        app:icon="@drawable/ic_delete"
+                        app:iconSize="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/titleTextField"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Todo New Title"
+                    android:visibility="@{viewModel.editMode? View.VISIBLE : View.GONE}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/titleEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.newTitle}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.editMode? View.VISIBLE : View.GONE}">
+
+                    <Button
+                        android:id="@+id/cancelEditButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{viewModel.cancelEditMode}"
+                        android:text="Cancel" />
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/saveEditButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="@{viewModel.canSaveEdit}"
+                        android:onClick="@{viewModel.saveTitle}"
+                        android:text="Save" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/itemsRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/todoTitle"
-                app:layout_constraintStart_toStartOf="@+id/todoTitle"
-                app:layout_constraintTop_toBottomOf="@+id/todoTitle" />
+                app:layout_constraintEnd_toEndOf="@+id/titleContainer"
+                app:layout_constraintStart_toStartOf="@+id/titleContainer"
+                app:layout_constraintTop_toBottomOf="@+id/titleContainer" />
             <!-- `0dp` for: https://stackoverflow.com/a/49584773/905801 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -54,14 +145,14 @@
             app:layout_behavior="com.google.android.material.transformation.FabTransformationSheetBehavior">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/titleTextField"
+                android:id="@+id/itemTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Item Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/titleEditText"
+                    android:id="@+id/itemEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.newName}" />

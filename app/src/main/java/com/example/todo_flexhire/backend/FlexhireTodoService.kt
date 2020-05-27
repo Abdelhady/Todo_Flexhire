@@ -31,4 +31,10 @@ public interface FlexhireTodoService {
         @Body model: TodoItemModelForPost
     ): Call<Void>
 
+    @PUT("todos/{todoId}")
+    fun updateTodo(@Path("todoId") todoId: Int, @Body model: TodoModelForPost): Call<Void>
+
+    @DELETE("todos/{todoId}")
+    fun deleteTodo(@Path("todoId") todoId: Int): Call<Void>
+
 }

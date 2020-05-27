@@ -3,6 +3,7 @@ package com.example.todo_flexhire
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_todo_items.*
 class TodoItemsActivity : AppCompatActivity() {
 
     val viewModel by viewModels<TodoItemsViewModel>()
-    val adapter = ItemsAdapter()
+    private val adapter = ItemsAdapter()
+    var parentRefreshNeeded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +28,34 @@ class TodoItemsActivity : AppCompatActivity() {
         viewModel.fetchTodo(id)
         initItemsList()
         initFab()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.deletionDone.observe(this, Observer {
+            if (it) {
+                parentRefreshNeeded = true
+                onBackPressed()
+            }
+        })
+        viewModel.editingDone.observe(this, Observer {
+            if (it) {
+                parentRefreshNeeded = true
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (parentRefreshNeeded) {
+            NavUtils.navigateUpFromSameTask(this)// To restart parent activity to refresh its list
+        }
     }
 
     private fun initFab() {
         fab.setOnClickListener {
             fab.isExpanded = true
-            // TODO focus on the textfield, with openin keyboard
+            // TODO focus on the textfield, with opening keyboard
         }
         cancelButton.setOnClickListener { fab.isExpanded = false }
     }
