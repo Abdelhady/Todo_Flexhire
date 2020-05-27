@@ -10,6 +10,7 @@ import com.example.todo_flexhire.R
 import com.example.todo_flexhire.databinding.ActivityRegisterBinding
 import com.example.todo_flexhire.prefs
 import com.example.todo_flexhire.ui.viewmodels.SignupViewModel
+import kotlinx.android.synthetic.main.activity_register.*
 import timber.log.Timber
 
 
@@ -24,7 +25,8 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
         val binding: ActivityRegisterBinding =
-            DataBindingUtil.setContentView(this,
+            DataBindingUtil.setContentView(
+                this,
                 R.layout.activity_register
             )
         binding.viewModel = viewModel
@@ -34,6 +36,10 @@ class RegisterActivity : AppCompatActivity() {
                 openTodosActivity()
             }
         })
+        loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
     private fun openTodosActivity() {

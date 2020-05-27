@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activities.LoginActivity"></activity>
         <activity
             android:name=".ui.activities.TodoItemsActivity"
-            android:parentActivityName=".ui.activities.TodosListActivity"></activity>
+            android:parentActivityName=".ui.activities.TodosListActivity" />
         <activity android:name=".ui.activities.TodosListActivity" />
         <activity android:name=".ui.activities.RegisterActivity">
             <intent-filter>
