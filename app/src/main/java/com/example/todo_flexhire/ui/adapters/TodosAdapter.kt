@@ -19,6 +19,8 @@ class TodosAdapter() :
     // TODO try to use the live data directly here!
     var items: MutableList<TodoModel> = mutableListOf()
         set(value) {
+            value.sortBy { it.id }
+            value.reverse()
             field = value
             notifyDataSetChanged()
         }

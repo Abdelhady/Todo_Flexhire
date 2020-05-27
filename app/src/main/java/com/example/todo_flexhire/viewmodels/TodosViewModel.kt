@@ -24,6 +24,7 @@ class TodosViewModel : ViewModel() {
 //        todoRepo.createTodo(model).observeForever(Observer {
 //            newlyAddedTodo.value = it
 //        })
+        newTitle.value = ""
         todoRepo.createTodo(model) {
             newlyAddedTodo.value = it
         }

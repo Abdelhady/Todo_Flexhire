@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_flexhire.databinding.ActivityTodosListBinding
 import com.example.todo_flexhire.services.AuthService
 import com.example.todo_flexhire.ui.adapters.TodosAdapter
+import com.example.todo_flexhire.utils.hideKeyboard
 import com.example.todo_flexhire.viewmodels.TodosViewModel
 import kotlinx.android.synthetic.main.activity_todos_list.*
 import timber.log.Timber
@@ -42,12 +43,20 @@ class TodosListActivity : AppCompatActivity() {
     private fun initFab() {
         // https://medium.com/@lcdsmao/material-design-transition-for-floating-action-button-in-android-dc8304343cfe
         fab.setOnClickListener { fab.isExpanded = true }
-        cancelButton.setOnClickListener { fab.isExpanded = false }
+        cancelButton.setOnClickListener {
+            fab.isExpanded = false
+            hideKeyboard()
+        }
 
         viewModel.newlyAddedTodo.observe(this, Observer {
             Timber.d("result: in activity, saved title is: %s", it.title)
+            hideKeyboard()
+            fab.isExpanded = false
             adapter.items.add(it)
+            adapter.items.sortBy { it.id }
+            adapter.items.reverse()
             adapter.notifyItemInserted(adapter.items.indexOf(it))
+            todosRecyclerView.layoutManager?.scrollToPosition(0)
         })
     }
 
