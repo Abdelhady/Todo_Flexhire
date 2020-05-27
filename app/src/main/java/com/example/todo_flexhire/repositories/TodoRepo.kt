@@ -110,6 +110,20 @@ class TodoRepo {
             })
     }
 
+    fun deleteItem(todoId: Int, itemId: Int){
+        todoService.deleteItem(todoId, itemId).enqueue(object: Callback<Void>{
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // TODO handle this
+                Timber.e(t)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                // TODO handle this and return a callback or something
+            }
+
+        })
+    }
+
     fun createItem(todoId: Int, model: TodoItemModelForPost, successCallback: (TodoModel) -> Unit) {
         todoService.createTodoItem(todoId, model).enqueue(object : Callback<TodoModel> {
             override fun onFailure(call: Call<TodoModel>, t: Throwable) {

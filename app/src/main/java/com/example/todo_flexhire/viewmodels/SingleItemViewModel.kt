@@ -8,15 +8,19 @@ import timber.log.Timber
 
 class SingleItemViewModel(val model: TodoItemModel) : ViewModel() {
 
-    val todoRepo = TodoRepo()
+    private val todoRepo = TodoRepo()
 
     fun onDoneChanged(buttonView: CompoundButton, isChecked: Boolean) {
         Timber.d("Check box for ${model.name} has just been clicked, newValue: $isChecked")
-        if (model.done == isChecked){
+        if (model.done == isChecked) {
             return
         }
         model.done = isChecked
         todoRepo.updateItem(model)
+    }
+
+    fun deleteItem() {
+        todoRepo.deleteItem(model.todoId, model.id)
     }
 
 }

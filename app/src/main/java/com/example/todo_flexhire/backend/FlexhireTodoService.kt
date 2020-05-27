@@ -37,4 +37,7 @@ public interface FlexhireTodoService {
     @DELETE("todos/{todoId}")
     fun deleteTodo(@Path("todoId") todoId: Int): Call<Void>
 
+    @DELETE("todos/{todoId}/items/{itemId}")
+    fun deleteItem(@Path("todoId") todoId: Int, @Path("itemId") itemId: Int): Call<Void>
+
 }

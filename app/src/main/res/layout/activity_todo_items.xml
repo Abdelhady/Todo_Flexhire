@@ -49,7 +49,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/editButton"
-                        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_toRightOf="@id/todoTitle"
@@ -63,7 +63,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/deleteButton"
-                        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:onClick="@{viewModel.deleteTodo}"
