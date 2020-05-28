@@ -12,7 +12,7 @@ import timber.log.Timber
 
 class TodoItemsViewModel : ViewModel() {
 
-    val todoRepo = TodoRepo()
+    private val todoRepo = TodoRepo()
     var todoModel = MutableLiveData<TodoModel>()
     val deletionDone = MutableLiveData(false)
     val editingDone = MutableLiveData(false)
@@ -42,6 +42,8 @@ class TodoItemsViewModel : ViewModel() {
 
     fun cancelEditMode(view: View) {
         editMode.value = false
+        // Because when starting edit mode again, setting the value will move the placeholder with a nice animation
+        newTitle.value = ""
     }
 
     fun deleteTodo(view: View) {
@@ -82,6 +84,7 @@ class TodoItemsViewModel : ViewModel() {
         val model = TodoModelForPost(newTitle.value!!)
         todoRepo.updateTitle(todoModel.value!!.id, model) {
             editMode.value = false
+            newTitle.value = ""
             refreshTodo(todoModel.value!!.id)// getting a fresh copy
             editingDone.value = true
         }

@@ -11,6 +11,8 @@ import com.example.todo_flexhire.R
 import com.example.todo_flexhire.databinding.ActivityTodoItemsBinding
 import com.example.todo_flexhire.ui.adapters.ItemsAdapter
 import com.example.todo_flexhire.ui.viewmodels.TodoItemsViewModel
+import com.example.todo_flexhire.utils.hideKeyboard
+import com.example.todo_flexhire.utils.showKeyboard
 import kotlinx.android.synthetic.main.activity_todo_items.*
 
 class TodoItemsActivity : AppCompatActivity() {
@@ -22,7 +24,8 @@ class TodoItemsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityTodoItemsBinding =
-            DataBindingUtil.setContentView(this,
+            DataBindingUtil.setContentView(
+                this,
                 R.layout.activity_todo_items
             )
         binding.viewModel = viewModel
@@ -58,9 +61,13 @@ class TodoItemsActivity : AppCompatActivity() {
     private fun initFab() {
         fab.setOnClickListener {
             fab.isExpanded = true
-            // TODO focus on the textfield, with opening keyboard
+            itemEditText.requestFocus()
+            showKeyboard()
         }
-        cancelButton.setOnClickListener { fab.isExpanded = false }
+        cancelButton.setOnClickListener {
+            fab.isExpanded = false
+            hideKeyboard()
+        }
     }
 
     private fun initItemsList() {
@@ -69,7 +76,7 @@ class TodoItemsActivity : AppCompatActivity() {
         viewModel.todoModel.observe(this, Observer {
             adapter.items = it?.items?.toMutableList()!!
             fab.isExpanded = false
-            // TODO hide keyboard here
+            hideKeyboard()
         })
     }
 

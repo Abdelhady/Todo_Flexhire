@@ -12,8 +12,9 @@ import com.example.todo_flexhire.databinding.ActivityTodosListBinding
 import com.example.todo_flexhire.prefs
 import com.example.todo_flexhire.services.AuthService
 import com.example.todo_flexhire.ui.adapters.TodosAdapter
-import com.example.todo_flexhire.utils.hideKeyboard
 import com.example.todo_flexhire.ui.viewmodels.TodosViewModel
+import com.example.todo_flexhire.utils.hideKeyboard
+import com.example.todo_flexhire.utils.showKeyboard
 import kotlinx.android.synthetic.main.activity_todos_list.*
 import timber.log.Timber
 
@@ -26,7 +27,8 @@ class TodosListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityTodosListBinding =
-            DataBindingUtil.setContentView(this,
+            DataBindingUtil.setContentView(
+                this,
                 R.layout.activity_todos_list
             )
         binding.viewModel = viewModel
@@ -46,7 +48,11 @@ class TodosListActivity : AppCompatActivity() {
 
     private fun initFab() {
         // https://medium.com/@lcdsmao/material-design-transition-for-floating-action-button-in-android-dc8304343cfe
-        fab.setOnClickListener { fab.isExpanded = true }
+        fab.setOnClickListener {
+            fab.isExpanded = true
+            titleEditText.requestFocus()
+            showKeyboard()
+        }
         cancelButton.setOnClickListener {
             fab.isExpanded = false
             hideKeyboard()
