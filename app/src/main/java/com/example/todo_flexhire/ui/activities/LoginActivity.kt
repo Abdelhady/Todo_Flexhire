@@ -2,6 +2,7 @@ package com.example.todo_flexhire.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,16 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
+        initToastListener()
+    }
+
+    private fun initToastListener() {
+        viewModel.toastMessage.observe(this, Observer { res ->
+            if (res != null) {
+                val message = res.format(this)
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun openTodosActivity() {

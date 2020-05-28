@@ -7,10 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo_flexhire.backend.model.LoginData
 import com.example.todo_flexhire.services.AuthService
+import com.example.todo_flexhire.utils.ResourceString
+import com.example.todo_flexhire.utils.SingleLiveEvent
+import com.example.todo_flexhire.utils.TextResourceString
 import timber.log.Timber
 
 class LoginViewModel : ViewModel() {
 
+    internal val toastMessage = SingleLiveEvent<ResourceString>()
     val isLoggedin = MutableLiveData(false)
     val loading = MutableLiveData(false)
 
@@ -30,6 +34,14 @@ class LoginViewModel : ViewModel() {
     val passwordError = MediatorLiveData<String>().apply {
         addSource(password) {
             value = if (it.isEmpty()) "Can't be empty" else null
+        }
+    }
+    val authError = MediatorLiveData<String>().apply {
+        addSource(email) {
+            value = ""
+        }
+        addSource(password) {
+            value = ""
         }
     }
 
@@ -52,10 +64,12 @@ class LoginViewModel : ViewModel() {
         val loginData = LoginData(email.value!!, password.value!!)
         AuthService.signin(loginData, {
             isLoggedin.value = true
-        }, {
+        }, { message ->
             loading.value = false
             // TODO show the returned error message
-            Timber.d("Login failed with message $it")
+            Timber.d("Login failed with message $message")
+            toastMessage.value = message?.let { it1 -> TextResourceString(it1) }
+            authError.value = message
         })
     }
 
