@@ -65,6 +65,21 @@ class SignupViewModel : ViewModel() {
         }
     }
 
+    val authError = MediatorLiveData<String>().apply {
+        addSource(name) {
+            value = ""
+        }
+        addSource(email) {
+            value = ""
+        }
+        addSource(password) {
+            value = ""
+        }
+        addSource(passwordConfirm) {
+            value = ""
+        }
+    }
+
     private fun isFormValid(): Boolean {
         return nameError.value == null &&
                 emailError.value == null &&
@@ -81,9 +96,9 @@ class SignupViewModel : ViewModel() {
         val user = User(name.value!!, email.value!!, password.value!!, passwordConfirm.value!!)
         AuthService.signup(user, {
             isRegistered.value = true
-        }, {
+        }, { message ->
             loading.value = false
-            // TODO show the returned error message
+            authError.value = message
         })
     }
 
