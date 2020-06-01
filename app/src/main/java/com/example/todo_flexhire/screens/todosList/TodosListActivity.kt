@@ -26,7 +26,7 @@ class TodosListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (application as TodoApplication).appComponent.loginComponent().create().inject(viewModel)
+        (application as TodoApplication).appComponent.todosListComponent().create().inject(viewModel)
         val binding: ActivityTodosListBinding =
             DataBindingUtil.setContentView(
                 this,

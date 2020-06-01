@@ -1,6 +1,6 @@
 package com.example.todo_flexhire.di
 
-import com.example.todo_flexhire.screens.todosList.di.LoginComponent
+import com.example.todo_flexhire.screens.todosList.di.TodosListComponent
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,6 +12,6 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
 
-    fun loginComponent(): LoginComponent.Factory
+    fun todosListComponent(): TodosListComponent.Factory
 
 }

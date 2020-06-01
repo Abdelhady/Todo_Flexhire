@@ -4,11 +4,11 @@ import com.example.todo_flexhire.screens.todosList.TodosViewModel
 import dagger.Subcomponent
 
 @Subcomponent
-interface LoginComponent {
+interface TodosListComponent {
 
     @Subcomponent.Factory
     interface Factory {
-        fun create(): LoginComponent
+        fun create(): TodosListComponent
     }
 
     fun inject(viewModel: TodosViewModel)

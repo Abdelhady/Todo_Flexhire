@@ -1,11 +1,11 @@
 package com.example.todo_flexhire.di
 
-import com.example.todo_flexhire.screens.todosList.di.LoginComponent
+import com.example.todo_flexhire.screens.todosList.di.TodosListComponent
 import dagger.Module
 
 @Module(
     subcomponents = [
-        LoginComponent::class
+        TodosListComponent::class
     ]
 )
 class SubcomponentsModule {
