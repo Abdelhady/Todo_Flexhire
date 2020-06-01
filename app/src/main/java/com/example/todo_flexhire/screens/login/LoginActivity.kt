@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo_flexhire.R
+import com.example.todo_flexhire.TodoApplication
 import com.example.todo_flexhire.databinding.ActivityLoginBinding
 import com.example.todo_flexhire.prefs
 import com.example.todo_flexhire.screens.register.RegisterActivity
@@ -21,6 +22,10 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as TodoApplication).appComponent
+            .loginComponent()
+            .create()
+            .inject(viewModel)
         val binding: ActivityLoginBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.viewModel = viewModel

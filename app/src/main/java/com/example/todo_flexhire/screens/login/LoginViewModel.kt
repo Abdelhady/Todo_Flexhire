@@ -11,10 +11,12 @@ import com.example.todo_flexhire.utils.ResourceString
 import com.example.todo_flexhire.utils.SingleLiveEvent
 import com.example.todo_flexhire.utils.TextResourceString
 import timber.log.Timber
+import javax.inject.Inject
 
 class LoginViewModel : ViewModel() {
 
-    var authService = AuthService()
+    @Inject
+    lateinit var authService: AuthService
 
     internal val toastMessage = SingleLiveEvent<ResourceString>()
     val isLoggedin = MutableLiveData(false)

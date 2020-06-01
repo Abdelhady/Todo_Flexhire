@@ -1,5 +1,6 @@
 package com.example.todo_flexhire.di
 
+import com.example.todo_flexhire.screens.login.di.LoginComponent
 import com.example.todo_flexhire.screens.register.di.RegisterComponent
 import com.example.todo_flexhire.screens.todoItems.di.TodoItemsComponent
 import com.example.todo_flexhire.screens.todosList.di.TodosListComponent
@@ -20,5 +21,7 @@ interface ApplicationComponent {
     fun todoItemsComponent(): TodoItemsComponent.Factory
 
     fun registerComponent(): RegisterComponent.Factory
+
+    fun loginComponent(): LoginComponent.Factory
 
 }
