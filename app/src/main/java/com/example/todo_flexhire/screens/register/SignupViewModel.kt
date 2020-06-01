@@ -10,6 +10,8 @@ import com.example.todo_flexhire.services.AuthService
 
 class SignupViewModel : ViewModel() {
 
+    var authService = AuthService()
+
     val name = MutableLiveData("")
     val nameError = MediatorLiveData<String>().apply {
         addSource(name) {
@@ -94,7 +96,7 @@ class SignupViewModel : ViewModel() {
     fun registerUser(view: View) {
         loading.value = true
         val user = User(name.value!!, email.value!!, password.value!!, passwordConfirm.value!!)
-        AuthService.signup(user, {
+        authService.signup(user, {
             isRegistered.value = true
         }, { message ->
             loading.value = false

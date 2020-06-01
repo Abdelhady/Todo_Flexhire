@@ -7,9 +7,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import javax.inject.Inject
 
 
-object AuthService {
+class AuthService @Inject constructor() {
 
     private val todoService = WebServiceBuilder.getTodoService()
 

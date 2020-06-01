@@ -14,6 +14,8 @@ import timber.log.Timber
 
 class LoginViewModel : ViewModel() {
 
+    var authService = AuthService()
+
     internal val toastMessage = SingleLiveEvent<ResourceString>()
     val isLoggedin = MutableLiveData(false)
     val loading = MutableLiveData(false)
@@ -62,7 +64,7 @@ class LoginViewModel : ViewModel() {
     fun loginUser(view: View) {
         loading.value = true
         val loginData = LoginData(email.value!!, password.value!!)
-        AuthService.signin(loginData, {
+        authService.signin(loginData, {
             isLoggedin.value = true
         }, { message ->
             loading.value = false
