@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.viewmodels
+package com.example.todo_flexhire.screens.todoItems
 
 import android.widget.CompoundButton
 import androidx.lifecycle.ViewModel

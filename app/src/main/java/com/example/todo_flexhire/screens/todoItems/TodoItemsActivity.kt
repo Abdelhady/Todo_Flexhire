@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.activities
+package com.example.todo_flexhire.screens.todoItems
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_flexhire.R
 import com.example.todo_flexhire.databinding.ActivityTodoItemsBinding
 import com.example.todo_flexhire.ui.adapters.ItemsAdapter
-import com.example.todo_flexhire.ui.viewmodels.TodoItemsViewModel
 import com.example.todo_flexhire.utils.hideKeyboard
 import com.example.todo_flexhire.utils.showKeyboard
 import kotlinx.android.synthetic.main.activity_todo_items.*

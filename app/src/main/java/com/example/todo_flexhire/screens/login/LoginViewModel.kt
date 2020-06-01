@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.viewmodels
+package com.example.todo_flexhire.screens.login
 
 import android.util.Patterns
 import android.view.View

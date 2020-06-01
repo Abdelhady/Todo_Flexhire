@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_flexhire.ui.activities.TodoItemsActivity
+import com.example.todo_flexhire.screens.todoItems.TodoItemsActivity
 import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.databinding.SingleTodoBinding
 import timber.log.Timber

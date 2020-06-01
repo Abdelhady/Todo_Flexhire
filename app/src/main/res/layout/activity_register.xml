@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.todo_flexhire.ui.viewmodels.SignupViewModel" />
+            type="com.example.todo_flexhire.screens.register.SignupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +17,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.RegisterActivity">
+        tools:context=".screens.register.RegisterActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextField"

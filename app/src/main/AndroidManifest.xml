@@ -12,12 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.LoginActivity"></activity>
+        <activity android:name=".screens.login.LoginActivity"></activity>
         <activity
-            android:name=".ui.activities.TodoItemsActivity"
-            android:parentActivityName=".ui.activities.TodosListActivity" />
-        <activity android:name=".ui.activities.TodosListActivity" />
-        <activity android:name=".ui.activities.RegisterActivity">
+            android:name=".screens.todoItems.TodoItemsActivity"
+            android:parentActivityName=".screens.todosList.TodosListActivity" />
+        <activity android:name=".screens.todosList.TodosListActivity" />
+        <activity android:name=".screens.register.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

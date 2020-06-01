@@ -8,8 +8,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import javax.inject.Inject
 
-class TodoRepo {
+class TodoRepo @Inject constructor() {
 
     private val todoService = WebServiceBuilder.getTodoService()
 
@@ -110,8 +111,8 @@ class TodoRepo {
             })
     }
 
-    fun deleteItem(todoId: Int, itemId: Int){
-        todoService.deleteItem(todoId, itemId).enqueue(object: Callback<Void>{
+    fun deleteItem(todoId: Int, itemId: Int) {
+        todoService.deleteItem(todoId, itemId).enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 // TODO handle this
                 Timber.e(t)
