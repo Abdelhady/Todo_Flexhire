@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo_flexhire.R
+import com.example.todo_flexhire.TodoApplication
 import com.example.todo_flexhire.databinding.ActivityRegisterBinding
 import com.example.todo_flexhire.prefs
 import com.example.todo_flexhire.screens.login.LoginActivity
@@ -25,6 +26,10 @@ class RegisterActivity : AppCompatActivity() {
             openTodosActivity()
             return
         }
+        (application as TodoApplication).appComponent
+            .registerComponent()
+            .create()
+            .inject(viewModel)
         val binding: ActivityRegisterBinding =
             DataBindingUtil.setContentView(
                 this,
