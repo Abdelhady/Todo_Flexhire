@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.todo_flexhire.ui.viewmodels.LoginViewModel" />
+            type="com.example.todo_flexhire.screens.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.LoginActivity">
+        tools:context=".screens.login.LoginActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextField"

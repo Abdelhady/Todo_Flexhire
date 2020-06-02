@@ -3,6 +3,8 @@ package com.example.todo_flexhire.backend
 import com.example.todo_flexhire.prefs
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import dagger.Module
+import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -11,11 +13,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-
 /**
  * https://dev.to/paulodhiambo/kotlin-and-retrofit-network-calls-2353
+ *
+ * https://developer.android.com/training/dependency-injection/dagger-android#dagger-modules
  */
-object WebServiceBuilder {
+@Module
+class NetworkModule {
 
     // For bearer authorization ; https://stackoverflow.com/a/41082979/905801
     // TODO should we disable this when we don't have token ? !
@@ -41,11 +45,9 @@ object WebServiceBuilder {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    fun <T> build(service: Class<T>): T {
-        return retrofit.create(service)
+    @Provides
+    fun provideTodoService(): FlexhireTodoService {
+        return retrofit.create(FlexhireTodoService::class.java)
     }
 
-    fun getTodoService(): FlexhireTodoService {
-        return build(FlexhireTodoService::class.java)
-    }
 }

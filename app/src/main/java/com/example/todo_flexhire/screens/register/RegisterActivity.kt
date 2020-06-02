@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.activities
+package com.example.todo_flexhire.screens.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo_flexhire.R
+import com.example.todo_flexhire.TodoApplication
 import com.example.todo_flexhire.databinding.ActivityRegisterBinding
 import com.example.todo_flexhire.prefs
-import com.example.todo_flexhire.ui.viewmodels.SignupViewModel
+import com.example.todo_flexhire.screens.login.LoginActivity
+import com.example.todo_flexhire.screens.todosList.TodosListActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import timber.log.Timber
 
@@ -24,6 +26,10 @@ class RegisterActivity : AppCompatActivity() {
             openTodosActivity()
             return
         }
+        (application as TodoApplication).appComponent
+            .registerComponent()
+            .create()
+            .inject(viewModel)
         val binding: ActivityRegisterBinding =
             DataBindingUtil.setContentView(
                 this,

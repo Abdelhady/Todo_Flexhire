@@ -3,9 +3,10 @@ package com.example.todo_flexhire.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_flexhire.TodoApplication
 import com.example.todo_flexhire.backend.model.TodoItemModel
 import com.example.todo_flexhire.databinding.TodoItemBinding
-import com.example.todo_flexhire.ui.viewmodels.SingleItemViewModel
+import com.example.todo_flexhire.screens.todoItems.SingleItemViewModel
 import kotlinx.android.synthetic.main.todo_item.view.*
 
 class ItemsAdapter() : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
@@ -32,8 +33,11 @@ class ItemsAdapter() : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: TodoItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TodoItemModel) {
-            val viewModel =
-                SingleItemViewModel(item) // TODO should we instantiate the view model in a different way?
+            val viewModel = SingleItemViewModel(item)
+            (itemView.context.applicationContext as TodoApplication).appComponent
+                .todoItemsComponent()
+                .create()
+                .inject(viewModel)
             binding.itemViewModel = viewModel
             binding.executePendingBindings()
             itemView.deleteButton.setOnClickListener {

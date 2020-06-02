@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.viewmodels
+package com.example.todo_flexhire.screens.todoItems
 
 import android.view.View
 import androidx.lifecycle.MediatorLiveData
@@ -9,10 +9,13 @@ import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.backend.model.TodoModelForPost
 import com.example.todo_flexhire.repositories.TodoRepo
 import timber.log.Timber
+import javax.inject.Inject
 
 class TodoItemsViewModel : ViewModel() {
 
-    private val todoRepo = TodoRepo()
+    @Inject
+    lateinit var todoRepo: TodoRepo
+
     var todoModel = MutableLiveData<TodoModel>()
     val deletionDone = MutableLiveData(false)
     val editingDone = MutableLiveData(false)

@@ -1,4 +1,4 @@
-package com.example.todo_flexhire.ui.viewmodels
+package com.example.todo_flexhire.screens.login
 
 import android.util.Patterns
 import android.view.View
@@ -11,8 +11,12 @@ import com.example.todo_flexhire.utils.ResourceString
 import com.example.todo_flexhire.utils.SingleLiveEvent
 import com.example.todo_flexhire.utils.TextResourceString
 import timber.log.Timber
+import javax.inject.Inject
 
 class LoginViewModel : ViewModel() {
+
+    @Inject
+    lateinit var authService: AuthService
 
     internal val toastMessage = SingleLiveEvent<ResourceString>()
     val isLoggedin = MutableLiveData(false)
@@ -62,7 +66,7 @@ class LoginViewModel : ViewModel() {
     fun loginUser(view: View) {
         loading.value = true
         val loginData = LoginData(email.value!!, password.value!!)
-        AuthService.signin(loginData, {
+        authService.signin(loginData, {
             isLoggedin.value = true
         }, { message ->
             loading.value = false

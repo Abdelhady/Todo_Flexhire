@@ -1,17 +1,18 @@
 package com.example.todo_flexhire.services
 
-import com.example.todo_flexhire.backend.WebServiceBuilder
+import com.example.todo_flexhire.backend.FlexhireTodoService
 import com.example.todo_flexhire.backend.model.*
 import com.example.todo_flexhire.prefs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import javax.inject.Inject
 
 
-object AuthService {
-
-    private val todoService = WebServiceBuilder.getTodoService()
+class AuthService @Inject constructor(
+    private val todoService: FlexhireTodoService
+) {
 
     fun signup(user: User, successCallback: () -> Unit, failureCallback: (error: String?) -> Unit) {
         Timber.d("result: before request, local authToken is: %s", prefs.authToken)

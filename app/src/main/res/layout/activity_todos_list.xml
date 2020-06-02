@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.todo_flexhire.ui.viewmodels.TodosViewModel" />
+            type="com.example.todo_flexhire.screens.todosList.TodosViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.TodosListActivity">
+        tools:context=".screens.todosList.TodosListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todosRecyclerView"
