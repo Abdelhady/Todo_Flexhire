@@ -2,7 +2,7 @@ package com.example.todo_flexhire.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.todo_flexhire.backend.WebServiceBuilder
+import com.example.todo_flexhire.backend.FlexhireTodoService
 import com.example.todo_flexhire.backend.model.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,9 +10,9 @@ import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
-class TodoRepo @Inject constructor() {
-
-    private val todoService = WebServiceBuilder.getTodoService()
+class TodoRepo @Inject constructor(
+    private val todoService: FlexhireTodoService
+) {
 
     fun getTodos(): LiveData<List<TodoModel>> {
         val data = MutableLiveData<List<TodoModel>>()

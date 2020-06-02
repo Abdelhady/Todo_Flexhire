@@ -1,5 +1,6 @@
 package com.example.todo_flexhire.di
 
+import com.example.todo_flexhire.backend.NetworkModule
 import com.example.todo_flexhire.screens.login.di.LoginComponent
 import com.example.todo_flexhire.screens.register.di.RegisterComponent
 import com.example.todo_flexhire.screens.todoItems.di.TodoItemsComponent
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        SubcomponentsModule::class
+        SubcomponentsModule::class,
+        NetworkModule::class
     ]
 )
 interface ApplicationComponent {
