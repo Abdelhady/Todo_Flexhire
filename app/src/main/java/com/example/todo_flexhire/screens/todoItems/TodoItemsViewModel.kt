@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.todo_flexhire.backend.model.TodoItemModelForPost
 import com.example.todo_flexhire.backend.model.TodoModel
 import com.example.todo_flexhire.backend.model.TodoModelForPost
+import com.example.todo_flexhire.repositories.ItemRepo
 import com.example.todo_flexhire.repositories.TodoRepo
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,6 +16,8 @@ class TodoItemsViewModel : ViewModel() {
 
     @Inject
     lateinit var todoRepo: TodoRepo
+    @Inject
+    lateinit var itemRepo: ItemRepo
 
     var todoModel = MutableLiveData<TodoModel>()
     val deletionDone = MutableLiveData(false)
@@ -74,7 +77,7 @@ class TodoItemsViewModel : ViewModel() {
         Timber.d("Will create new item with name: ${newName.value}, and done: ${doneChecked.value}")
         val model = TodoItemModelForPost(newName.value!!, doneChecked.value!!)
         todoModel.value?.id?.let { todoId ->
-            todoRepo.createItem(todoId, model) {
+            itemRepo.createItem(todoId, model) {
                 todoModel.value = it
                 newName.value = ""
                 doneChecked.value = false
