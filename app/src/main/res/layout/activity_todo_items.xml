@@ -80,7 +80,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Todo New Title"
+                    android:hint="@string/todo_new_title_hint"
                     android:visibility="@{viewModel.editMode? View.VISIBLE : View.GONE}">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="@{viewModel.cancelEditMode}"
-                        android:text="Cancel" />
+                        android:text="@string/cancel" />
 
                     <Space
                         android:layout_width="10dp"
@@ -116,7 +116,7 @@
                         android:layout_weight="1"
                         android:enabled="@{viewModel.canSaveEdit}"
                         android:onClick="@{viewModel.saveTitle}"
-                        android:text="Save" />
+                        android:text="@string/save" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -149,7 +149,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Item Name">
+                android:hint="@string/item_name_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/itemEditText"
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@={viewModel.doneChecked}"
-                android:text="Done" />
+                android:text="@string/done" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancel" />
+                    android:text="@string/cancel" />
 
                 <Space
                     android:layout_width="10dp"
@@ -188,7 +188,7 @@
                     android:layout_weight="1"
                     android:enabled="@{viewModel.canCreate}"
                     android:onClick="@{viewModel.createItem}"
-                    android:text="Create" />
+                    android:text="@string/create" />
             </LinearLayout>
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>

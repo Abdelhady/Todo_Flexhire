@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
-                android:hint="Todo Title">
+                android:hint="@string/todo_title_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/titleEditText"
@@ -59,7 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancel" />
+                    android:text="@string/cancel" />
 
                 <Space
                     android:layout_width="10dp"
@@ -72,7 +72,7 @@
                     android:layout_weight="1"
                     android:enabled="@{viewModel.canCreate}"
                     android:onClick="@{viewModel.createTodo}"
-                    android:text="Create" />
+                    android:text="@string/create" />
             </LinearLayout>
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>

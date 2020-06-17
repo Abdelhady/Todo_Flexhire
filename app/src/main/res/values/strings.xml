@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Todo_Flexhire</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="or">Or</string>
+    <string name="login">Login</string>
+    <string name="todo_new_title_hint">Todo New Title</string>
+    <string name="save">Save</string>
+    <string name="item_name_hint">Item Name</string>
+    <string name="done">Done</string>
+    <string name="todo_title_hint">Todo Title</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
 </resources>
