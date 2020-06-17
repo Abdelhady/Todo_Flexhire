@@ -2,6 +2,8 @@ package com.example.todo_flexhire.ui.bindingAdapters
 
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
+import com.example.todo_flexhire.TodoApplication
+import com.example.todo_flexhire.utils.ResourceString
 
 
 object CustomBindingAdaptors {
@@ -26,6 +28,12 @@ object CustomBindingAdaptors {
     @JvmStatic
     fun showError(editText: EditText, value: String?) {
         editText.error = value
+    }
+
+    @BindingAdapter("errorText")
+    @JvmStatic
+    fun showError(editText: EditText, value: ResourceString?) {
+        editText.error = value?.format(TodoApplication.appContext) ?: ""
     }
 
 }

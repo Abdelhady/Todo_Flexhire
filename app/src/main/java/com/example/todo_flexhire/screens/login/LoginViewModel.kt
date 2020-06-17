@@ -5,8 +5,10 @@ import android.view.View
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.todo_flexhire.R
 import com.example.todo_flexhire.backend.model.LoginData
 import com.example.todo_flexhire.services.AuthService
+import com.example.todo_flexhire.utils.IdResourceString
 import com.example.todo_flexhire.utils.ResourceString
 import com.example.todo_flexhire.utils.SingleLiveEvent
 import com.example.todo_flexhire.utils.TextResourceString
@@ -23,12 +25,12 @@ class LoginViewModel : ViewModel() {
     val loading = MutableLiveData(false)
 
     val email = MutableLiveData("")
-    val emailError = MediatorLiveData<String>().apply {
+    val emailError = MediatorLiveData<ResourceString>().apply {
         addSource(email) {
             value = if (it.isEmpty()) {
-                "Can't be empty"
+                IdResourceString(R.string.cant_be_empty)
             } else if (!Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
-                "Invalid Email Address"
+                IdResourceString(R.string.invalid_email_address)
             } else {
                 null
             }

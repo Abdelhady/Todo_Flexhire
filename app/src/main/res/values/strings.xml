@@ -14,4 +14,6 @@
     <string name="todo_title_hint">Todo Title</string>
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
+    <string name="cant_be_empty">Can\'t be empty</string>
+    <string name="invalid_email_address">Invalid Email Address</string>
 </resources>

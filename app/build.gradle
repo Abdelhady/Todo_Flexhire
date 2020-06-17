@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.todo_flexhire"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 28 // Can't target 29 yet, because of: // https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-testing-basics/#7
         versionCode 1
         versionName "1.0"
 
@@ -37,6 +37,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    testOptions {
+        unitTests {
+            // https://stackoverflow.com/a/58630321/905801
+            // https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-testing-basics/#7
+            includeAndroidResources = true
+        }
+    }
+
 }
 
 def retrofit_version = '2.8.1'
@@ -58,6 +66,11 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
     // For testing live data in the same thread
     testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // AndroidX test (to get components like `Application` context
+    testImplementation "androidx.test.ext:junit-ktx:1.1.1"
+    testImplementation "androidx.test:core-ktx:1.2.0"
+    testImplementation "org.robolectric:robolectric:4.3.1"
 
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
