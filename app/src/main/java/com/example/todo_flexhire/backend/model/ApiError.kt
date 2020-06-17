@@ -7,7 +7,7 @@ import retrofit2.Response
 /**
  * https://stackoverflow.com/a/61475050/905801
  */
-class ApiError(var code: Int, val message: String = "General error occurred")
+class ApiError(var code: Int, val message: String = "General error occurred") // TODO string here should be extracted for localization
 
 // To be used in `onFailure()`
 fun Throwable.getApiError(): ApiError? {

@@ -33,7 +33,7 @@ object CustomBindingAdaptors {
     @BindingAdapter("errorText")
     @JvmStatic
     fun showError(editText: EditText, value: ResourceString?) {
-        editText.error = value?.format(TodoApplication.appContext) ?: ""
+        editText.error = value?.format(TodoApplication.appContext)
     }
 
 }

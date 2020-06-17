@@ -37,12 +37,13 @@ class LoginViewModel : ViewModel() {
         }
     }
     val password = MutableLiveData("")
-    val passwordError = MediatorLiveData<String>().apply {
+    val passwordError = MediatorLiveData<ResourceString>().apply {
         addSource(password) {
-            value = if (it.isEmpty()) "Can't be empty" else null
+            value = if (it.isEmpty()) IdResourceString(R.string.cant_be_empty) else null
         }
     }
     val authError = MediatorLiveData<String>().apply {
+        // Just emptying this error when any field changes
         addSource(email) {
             value = ""
         }
